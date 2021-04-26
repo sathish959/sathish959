@@ -13,6 +13,5 @@ ENV JAVA_HOME "/opt/java8"
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 CMD ["/opt/tomcat8/bin/catalina.sh", "run"]
 RUN yum install maven -y
-RUN mvn clean package
 COPY /opt/target/*.war /opt/tomcat8/webapps
 EXPOSE 8080
