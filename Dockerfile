@@ -13,5 +13,9 @@ ENV JAVA_HOME "/opt/java8"
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 CMD ["/opt/tomcat8/bin/catalina.sh", "run"]
 RUN yum install maven -y
-COPY /opt/target/*.war /opt/tomcat8/webapps
+RUN yum install git -y
+RUN git clone https://github.com/sathish959/sathish959.git
+WORKDIR /opt/sathish959
+RUN mvn clean package
+COPY /opt/sathish959/target/*.war /opt/tomcat8/webapps
 EXPOSE 8080
