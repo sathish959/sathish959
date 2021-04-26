@@ -12,6 +12,7 @@ RUN echo export PATH=$PATH:/opt/java8/bin >> /etc/profile
 ENV JAVA_HOME "/opt/java8"
 ENV PATH "${JAVA_HOME}/bin:${PATH}"
 CMD ["/opt/tomcat8/bin/catalina.sh", "run"]
-WORKDIR /opt/tomcat8/webapps
-RUN wget https://samathajeela.s3-us-west-2.amazonaws.com/target/petclinic.war
-
+RUN yum install maven -y
+RUN mvn clean package
+COPY /opt/target/*.war /opt/tomcat8/webapps
+EXPOSE 8080
